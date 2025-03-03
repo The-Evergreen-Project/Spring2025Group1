@@ -1,1 +1,5 @@
-# Spring2025Group2
+Valeria Urzua (valeriaurzua524)
+Gloriele Mendoza (glorie16)
+Thy Hoang (thy-hoang)
+Zoey Yung (Sug4rPlum04)
+Kerry Kong (SunShinier404)
