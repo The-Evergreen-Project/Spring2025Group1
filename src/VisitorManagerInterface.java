@@ -11,7 +11,8 @@ import java.util.List;
 public interface VisitorManagerInterface {
 
     // Adds a new visitor to the registry
-    void addVisitor(String name, LocalDate visitDate, String reasonForVisiting, String feedback);
+    void addVisitor(String name, LocalDate visitDate, String reasonForVisiting, String feedback, String gradeLevel);
+
 
     // Displays all visitors in the registry
     void displayVisitors();
