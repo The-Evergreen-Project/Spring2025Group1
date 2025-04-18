@@ -5,8 +5,8 @@
 * @author Gloriele Mendoza
 *
 **/
+import java.time.LocalDate;
 import java.util.List;
-import java.util.LocalDate;
 
 public interface VisitorManagerInterface {
 
