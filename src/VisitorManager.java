@@ -17,6 +17,7 @@ public class VisitorManager implements VisitorManagerInterface {
     public void addVisitor(String name, LocalDate visitDate, String reasonForVisiting, String feedback, String gradeLevel) {
         Visitor newVisitor = new Visitor(name, visitDate, reasonForVisiting, feedback, gradeLevel);
         visitorList.add(newVisitor);
+        visitorQueue.add(newVisitor); // Add to queue as well
     }
 
     @Override
@@ -46,14 +47,28 @@ public class VisitorManager implements VisitorManagerInterface {
     @Override
     public void displayVisitorsByDate(LocalDate date) {
         List<Visitor> visitorsOnDate = filterVisitorsByDate(date);
+        int count = 0; 
         if (visitorsOnDate.isEmpty()) {
             System.out.println("No visitors found on " + date + ".");
         } else {
             for (Visitor visitor : visitorsOnDate) {
                 visitor.print();
+                count++;
             }
+            System.out.println("Total visitors on " + date + ": " + count);
         }
 
+    }
+
+    public void displaySubmissionOrder() {//this displays the default order of visitors in queue based on arrival
+        if (visitorQueue.isEmpty()) {
+            System.out.println("No visitors in the queue.");
+        } else {
+            System.out.println("Visitors in submission order:");
+            for (Visitor visitor : visitorQueue) {
+                visitor.print();
+            }
+        }
     }
 
     @Override
@@ -84,6 +99,7 @@ public class VisitorManager implements VisitorManagerInterface {
 
     if (toRemove != null) {
         visitorList.remove(toRemove);
+        visitorQueue.remove(toRemove); // Also remove from the queue
         System.out.println("Visitor \"" + name + "\" removed.");
     } 
     else {
