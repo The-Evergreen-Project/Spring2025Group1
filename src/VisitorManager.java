@@ -17,21 +17,26 @@ public class VisitorManager implements VisitorManagerInterface {
     }
 
     @Override
-    public void displayVisitors() 
+    public void displayVisitors() {}
 
 
     @Override
-    public List<Visitor> filterVisitorsByDate(LocalDate date) 
+    public List<Visitor> filterVisitorsByDate(LocalDate date) {
+        return visitorList.stream()
+                .filter(visitor -> visitor.getVisitDate().equals(date))
+                .toList();
+    }
 
 
     @Override
-    public void displayVisitorsByDate(LocalDate date) 
+    public void displayVisitorsByDate(LocalDate date) {}
 
 
     @Override
-    public void displayVisitorsByGrade(String gradeLevel) 
+    public void displayVisitorsByGrade(String gradeLevel) {}
     
 
     @Override
-    public void removeVisitor(String name) 
+    public void removeVisitor(String name) {
+    }
 }
