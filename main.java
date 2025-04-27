@@ -32,8 +32,11 @@ public class Main {
                     while(visitDate==null){
                         try {   
                             String dateInput = scanner.nextLine();
+                            visitDate = LocalDate.parse(dateInput);
+                        
                         } catch (Exception e) {
                             System.out.println("Not a valid date. Please enter the date in the format (yyyy-mm-dd).");
+
                         }
                     }
 
