@@ -27,13 +27,14 @@ public class Main {
                     String name = scanner.nextLine();
 
                     System.out.print("Visit Date (yyyy-mm-dd): ");
-                    String dateInput = scanner.nextLine();
-                    LocalDate visitDate;
-                    try {
-                        visitDate = LocalDate.parse(dateInput);
-                    } catch (Exception e) {
-                        System.out.println("not a valid date");
-                        break;
+                    LocalDate visitDate=null;
+                       
+                    while(visitDate==null){
+                        try {   
+                            String dateInput = scanner.nextLine();
+                        } catch (Exception e) {
+                            System.out.println("Not a valid date. Please enter the date in the format (yyyy-mm-dd).");
+                        }
                     }
 
                     System.out.print("What is the reason for visiting: ");
