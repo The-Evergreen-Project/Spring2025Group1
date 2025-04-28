@@ -20,6 +20,7 @@ public class Main {
                 System.out.println("5) Display order of arrivals");
                 System.out.println("6) Remove a visitor");
                 System.out.println("7) Register a visitor for an event");
+                System.out.println("8) Display event registrants");
                 System.out.println("0) Exit");
                 
                 System.out.print("Choose an option: ");
@@ -50,7 +51,7 @@ public class Main {
                         System.out.print("Feedback: ");
                         String feedback = scanner.nextLine();
                         
-                        System.out.print("Grade Level (if applicable): ");
+                        System.out.print("Grade Level (First, second, third, fourth, other, or N/A): ");
                         String grade = scanner.nextLine();
                         
                         manager.addVisitor(name, visitDate, reason, feedback, grade, writer);
@@ -110,7 +111,9 @@ public class Main {
                         }
                         manager.registerForEvent(nameForEvent, eventName, eventDate, scanner, writer);
                         break;
-                        
+                    case "8":
+                        manager.displayEventRegistrants();
+                        break;
                     case "0":
                         open = false;
                         System.out.println("Goodbye!");

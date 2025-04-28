@@ -33,4 +33,7 @@ public interface VisitorManagerInterface {
 
     // Lets the user register for an event
     void registerForEvent(String name, String eventName, LocalDate eventDate, Scanner scan, PrintWriter writer);
+
+    //Displays event registrants in order
+    void displayEventRegistrants();
 }

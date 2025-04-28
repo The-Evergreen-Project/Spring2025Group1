@@ -8,10 +8,12 @@ import java.util.Scanner;
 public class VisitorManager implements VisitorManagerInterface {
     private List<Visitor> visitorList; // List to store all visitors
     private LinkedList<Visitor> visitorQueue; // Queue to manage visitors in order of arrival
-
+    private LinkedList<Visitor> eventRegistrationQueue; // Queue to manage event registrations
+ 
     public VisitorManager() {
         visitorList = new ArrayList<>();
         visitorQueue = new LinkedList<>();
+        eventRegistrationQueue = new LinkedList<>();
     }
 
     // add a visitor
@@ -115,19 +117,36 @@ public class VisitorManager implements VisitorManagerInterface {
     public void registerForEvent(String name, String eventName, LocalDate eventDate, Scanner scan, PrintWriter writer) {
         for (Visitor visitor : visitorList) {
             if (visitor.getName().equalsIgnoreCase(name)) {
+                if (!eventRegistrationQueue.contains(visitor)) {
+                    eventRegistrationQueue.add(visitor);
+                }
                 writer.println("Visitor \"" + name + "\" registered for event: " + eventName + " on " + eventDate);
                 System.out.println("Visitor \"" + name + "\" registered for event: " + eventName + " on " + eventDate);
                 return;
             }
         }
-        System.out.println("Visitor \"" + name + "\" not found. Would you like to add them to the visitor log first? (yes/no)");
+        System.out.println(
+                "Visitor \"" + name + "\" not found. Would you like to add them to the visitor log first? (yes/no)");
         String response = scan.nextLine();
         if (response.equalsIgnoreCase("yes")) {
             addVisitor(name, eventDate, "Event Registration", "", "N/A", writer);
+            Visitor newVisitor = visitorList.get(visitorList.size() - 1); // The one just added
+            eventRegistrationQueue.add(newVisitor);
             writer.println("Visitor \"" + name + "\" registered for event: " + eventName + " on " + eventDate);
         } else {
             System.out.println("Visitor not registered for the event.");
         }
 
+    }
+    @Override
+    public void displayEventRegistrants() {
+        if (eventRegistrationQueue.isEmpty()) {
+            System.out.println("No visitors have registered for events.");
+        } else {
+            System.out.println("Event Registrants:");
+            for (Visitor visitor : eventRegistrationQueue) {
+                visitor.print();
+            }
+        }
     }
 }
