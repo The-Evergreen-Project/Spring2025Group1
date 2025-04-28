@@ -5,13 +5,14 @@
 * @author Gloriele Mendoza
 *
 **/
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.List;
 
 public interface VisitorManagerInterface {
 
     // Adds a new visitor to the registry
-    void addVisitor(String name, LocalDate visitDate, String reasonForVisiting, String feedback, String gradeLevel);
+    void addVisitor(String name, LocalDate visitDate, String reasonForVisiting, String feedback, String gradeLevel, PrintWriter writer);
 
 
     // Displays all visitors in the registry
@@ -27,5 +28,8 @@ public interface VisitorManagerInterface {
 	void displayVisitorsByGrade(String gradeLevel);
     
     // Optional: Removes a visitor by their name (or ID)
-    void removeVisitor(String name);
+    void removeVisitor(String name, PrintWriter writer);
+
+    // Lets the user register for an event
+    void registerForEvent(String name, String eventName, LocalDate eventDate, PrintWriter writer);
 }

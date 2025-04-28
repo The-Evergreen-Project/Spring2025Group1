@@ -1,3 +1,4 @@
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -14,10 +15,11 @@ public class VisitorManager implements VisitorManagerInterface {
 
     // add a visitor
     @Override
-    public void addVisitor(String name, LocalDate visitDate, String reasonForVisiting, String feedback, String gradeLevel) {
+    public void addVisitor(String name, LocalDate visitDate, String reasonForVisiting, String feedback, String gradeLevel, PrintWriter writer) {
         Visitor newVisitor = new Visitor(name, visitDate, reasonForVisiting, feedback, gradeLevel);
         visitorList.add(newVisitor);
         visitorQueue.add(newVisitor); // Add to queue as well
+        writer.println("Visitor \"" + name + "\" added to the registry.");
     }
 
     @Override
@@ -88,7 +90,7 @@ public class VisitorManager implements VisitorManagerInterface {
     
 
     @Override
-    public void removeVisitor(String name) {
+    public void removeVisitor(String name, PrintWriter writer) {
         Visitor toRemove = null;
     for (Visitor visitor : visitorList) {
         if (visitor.getName().equalsIgnoreCase(name)) {
@@ -100,10 +102,29 @@ public class VisitorManager implements VisitorManagerInterface {
     if (toRemove != null) {
         visitorList.remove(toRemove);
         visitorQueue.remove(toRemove); // Also remove from the queue
-        System.out.println("Visitor \"" + name + "\" removed.");
+        writer.println("Visitor \"" + name + "\" removed.");
     } 
     else {
         System.out.println("Visitor \"" + name + "\" not found.");
     }
+    }
+
+    @Override
+    public void registerForEvent(String name, String eventName, LocalDate eventDate, PrintWriter writer) {
+        for (Visitor visitor : visitorList) {
+            if (visitor.getName().equalsIgnoreCase(name)) {
+                writer.println("Visitor \"" + name + "\" registered for event: " + eventName + " on " + eventDate);
+                return;
+            }
+        }
+        System.out.println("Visitor \"" + name + "\" not found. Would you like to add them to the visitor log first? (yes/no)");
+        String response = writer.toString().trim(); // Assuming this is how you get the response from the user
+        if (response.equalsIgnoreCase("yes")) {
+            addVisitor(name, eventDate, "Event Registration", "", "N/A", writer);
+            writer.println("Visitor \"" + name + "\" registered for event: " + eventName + " on " + eventDate);
+        } else {
+            System.out.println("Visitor not registered for the event.");
+        }
+
     }
 }
