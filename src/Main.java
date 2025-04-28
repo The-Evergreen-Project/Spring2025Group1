@@ -6,9 +6,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         VisitorManager manager = new VisitorManager();
-        try (Scanner scanner = new Scanner(System.in); PrintWriter writer = new PrintWriter(new FileWriter("visitor_log.txt"))) {
+        try (Scanner scanner = new Scanner(System.in); PrintWriter writer = new PrintWriter(new FileWriter("FarmVisitor_log.txt"))) {
             boolean open = true;
             
+            writer.println("Visitor Log System - " + LocalDate.now());
+
             while (open) {
                 System.out.println("\nEVERGREEN VISITOR LOG");
                 System.out.println("1) Add a visitor");
@@ -106,12 +108,13 @@ public class Main {
                                 
                             }
                         }
-                        manager.registerForEvent(nameForEvent, eventName, eventDate, writer);
+                        manager.registerForEvent(nameForEvent, eventName, eventDate, scanner, writer);
                         break;
                         
                     case "0":
                         open = false;
                         System.out.println("Goodbye!");
+                        writer.println("Visitor Log System closed on " + LocalDate.now());
                         break;
                         
                     default:

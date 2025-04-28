@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 public class VisitorManager implements VisitorManagerInterface {
     private List<Visitor> visitorList; // List to store all visitors
@@ -103,6 +104,7 @@ public class VisitorManager implements VisitorManagerInterface {
         visitorList.remove(toRemove);
         visitorQueue.remove(toRemove); // Also remove from the queue
         writer.println("Visitor \"" + name + "\" removed.");
+        System.out.println("Visitor \"" + name + "\" removed.");
     } 
     else {
         System.out.println("Visitor \"" + name + "\" not found.");
@@ -110,15 +112,16 @@ public class VisitorManager implements VisitorManagerInterface {
     }
 
     @Override
-    public void registerForEvent(String name, String eventName, LocalDate eventDate, PrintWriter writer) {
+    public void registerForEvent(String name, String eventName, LocalDate eventDate, Scanner scan, PrintWriter writer) {
         for (Visitor visitor : visitorList) {
             if (visitor.getName().equalsIgnoreCase(name)) {
                 writer.println("Visitor \"" + name + "\" registered for event: " + eventName + " on " + eventDate);
+                System.out.println("Visitor \"" + name + "\" registered for event: " + eventName + " on " + eventDate);
                 return;
             }
         }
         System.out.println("Visitor \"" + name + "\" not found. Would you like to add them to the visitor log first? (yes/no)");
-        String response = writer.toString().trim(); // Assuming this is how you get the response from the user
+        String response = scan.nextLine();
         if (response.equalsIgnoreCase("yes")) {
             addVisitor(name, eventDate, "Event Registration", "", "N/A", writer);
             writer.println("Visitor \"" + name + "\" registered for event: " + eventName + " on " + eventDate);

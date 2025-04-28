@@ -8,6 +8,7 @@
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Scanner;
 
 public interface VisitorManagerInterface {
 
@@ -31,5 +32,5 @@ public interface VisitorManagerInterface {
     void removeVisitor(String name, PrintWriter writer);
 
     // Lets the user register for an event
-    void registerForEvent(String name, String eventName, LocalDate eventDate, PrintWriter writer);
+    void registerForEvent(String name, String eventName, LocalDate eventDate, Scanner scan, PrintWriter writer);
 }
